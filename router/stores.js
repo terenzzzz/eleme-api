@@ -4,9 +4,9 @@ const express = require('express')
 const router = express.Router()
 
 // 导入路由处理函数模块
-const getStores = require('../router_handler/stores_handler')
+const storesHandler = require('../router_handler/stores_handler')
 
-router.get('/stores', getStores.stores)
-router.get('/store', getStores.store)
+router.get('/stores', storesHandler.stores)
+router.get('/store', storesHandler.store)
 
 module.exports = router

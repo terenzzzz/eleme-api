@@ -4,8 +4,8 @@ const express = require('express')
 const router = express.Router()
 
 // 导入路由处理函数模块
-const getmenu = require('../router_handler/menu_handler')
+const menuHandler = require('../router_handler/menu_handler')
 
-router.get('/menu/:storeId', getmenu.menu)
+router.get('/menu/:storeId', menuHandler.menu)
 
 module.exports = router

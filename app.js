@@ -58,9 +58,17 @@ app.use('/api', storesRouter)
 const menuRouter = require('./router/menu')
 app.use('/api',menuRouter)
 
-//用户模块
+//登录模块
 const userRouter = require('./router/user')
-app.use('/api',userRouter)
+app.use('/api', userRouter)
+
+//用户信息模块
+const userInfoRouter = require('./router/userInfo')
+app.use('/my', userInfoRouter)
+
+//功能模块
+const functionsRouter = require('./router/functions')
+app.use('/api', functionsRouter)
 
 // write your code here...
 // 调用 app.listen 方法，指定端口号并启动web服务器 

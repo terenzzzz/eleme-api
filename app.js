@@ -1,5 +1,12 @@
 // 导入 express 模块 
 const express = require('express')
+
+// 导入配置文件 
+const config = require('./config')
+
+// 解析 token 的中间件 
+const expressJWT = require('express-jwt')
+
 // 创建 express 的服务器实例 
 const app = express()
 
@@ -23,15 +30,23 @@ app.use(function (req, res, next) {
     }
     next()
 })
-// 验证表单捕获失败信息中间件
+
+const joi = require('joi')
+
+// 错误级别中间件
 app.use(function (err, req, res, next) {
     // 数据验证失败 
     if (err instanceof joi.ValidationError) return res.cc(err)
+    // 捕获身份认证失败的错误 
+    if (err.name === 'UnauthorizedError') return res.cc('身份认证失败！')
     // 未知错误 
     res.cc(err)
 })
 
-    //分类模块
+// 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
+app.use(expressJWT({ secret: config.jwtSecretKey, algorithms: ['HS256'] }).unless({ path: [/^\/api\//] }))
+
+//分类模块
 const categoriesRouter = require('./router/categories')
 app.use('/api', categoriesRouter)
 

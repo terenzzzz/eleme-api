@@ -72,6 +72,10 @@ app.use('/api', functionsRouter)
 
 // write your code here...
 // 调用 app.listen 方法，指定端口号并启动web服务器 
-app.listen(592592, function () {
-    console.log('api server running at https://eleme-node.herokuapp.com:592592')
+// # use alternate localhost and the port Heroku assigns to $PORT
+const host = '0.0.0.0';
+const port = process.env.PORT || 3000;
+
+app.listen(port, host, function () {
+    console.log('api server running at' + host + ':' + 'port')
 })

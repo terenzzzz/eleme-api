@@ -70,16 +70,20 @@ app.use('/my', userInfoRouter)
 const functionsRouter = require('./router/functions')
 app.use('/api', functionsRouter)
 
+// 订单模块
+const ordersRouter = require('./router/orders')
+app.use('/my', ordersRouter)
+
 // write your code here...
 // 调用 app.listen 方法，指定端口号并启动web服务器
 // # use alternate localhost and the port Heroku assigns to $PORT
 // 部署使用
-const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
+// const host = '0.0.0.0';
+// const port = process.env.PORT || 3000;
 
 //开发使用
-// const host = '127.0.0.1'; 
-// const port = process.env.PORT || 3007;
+const host = '127.0.0.1'; 
+const port = process.env.PORT || 3007;
 
 app.listen(port, host, function () {
     console.log('api server running at http://' + host + ':' + port)

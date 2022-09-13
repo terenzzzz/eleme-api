@@ -6,6 +6,6 @@ const router = express.Router()
 // 导入路由处理函数模块
 const menuHandler = require('../router_handler/menu_handler')
 
-router.get('/menu/:storeId', menuHandler.menu)
+router.get('/menu', menuHandler.menu)
 
 module.exports = router

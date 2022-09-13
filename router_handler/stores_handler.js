@@ -21,7 +21,7 @@ exports.stores = (req, res) => {
 // 查询单个商店的菜单
 exports.store = (req, res) => {
     const sqlQuery = `SELECT * FROM stores WHERE id = ?;`
-    db.query(sqlQuery, req.query.id, function (err, results) { 
+    db.query(sqlQuery, req.query.storeId, function (err, results) { 
         if (err) {
             return res.send({status:1,message:err.message})
         }

@@ -32,11 +32,8 @@ app.use(function (req, res, next) {
 })
 
 const joi = require('joi')
-
-
-
 // 错误级别中间件
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
     // 数据验证失败 
     if (err instanceof joi.ValidationError) return res.cc(err)
     // 捕获身份认证失败的错误 
@@ -81,12 +78,12 @@ app.use('/my', ordersRouter)
 // 调用 app.listen 方法，指定端口号并启动web服务器
 // # use alternate localhost and the port Heroku assigns to $PORT
 // 部署使用
-const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
+// const host = '0.0.0.0';
+// const port = process.env.PORT || 3000;
 
 //开发使用
-// const host = '127.0.0.1'; 
-// const port = process.env.PORT || 3007;
+const host = '127.0.0.1'; 
+const port = process.env.PORT || 3007;
 
 app.listen(port, host, function () {
     console.log('api server running at http://' + host + ':' + port)

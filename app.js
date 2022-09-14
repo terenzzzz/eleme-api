@@ -78,6 +78,10 @@ app.use('/my', ordersRouter)
 const statusRouter = require('./router/status')
 app.use('/my', statusRouter)
 
+// 用户信息更改
+const settingRouter = require('./router/setting')
+app.use('/my', settingRouter)
+
 // write your code here...
 // 调用 app.listen 方法，指定端口号并启动web服务器
 // # use alternate localhost and the port Heroku assigns to $PORT

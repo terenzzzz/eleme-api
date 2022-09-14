@@ -7,7 +7,7 @@ const router = express.Router()
 const ordersHandler = require('../router_handler/orders_handler')
 
 router.get('/orders', ordersHandler.orders)
-
+router.get('/order', ordersHandler.order)
 router.get('/orderDetail', ordersHandler.orderDetail)
 
 module.exports = router

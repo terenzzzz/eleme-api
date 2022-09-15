@@ -3,7 +3,7 @@ const db = require('../db/index')
 
 // 获取用户信息
 exports.userInfo = (req, res) => {
-    const sqlQuery = `select id,phone,nickName,userPic,giftCard,redPack,voucher from users where id=?`
+    const sqlQuery = `select id,phone,nickName,email,birth,userPic,giftCard,redPack,voucher from users where id=?`
     db.query(sqlQuery, req.user.id, (err, results) => {
         if (err) return res.cc(err)
         if (results.length !== 1) return res.cc('获取用户信息失败！')

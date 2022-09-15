@@ -1,19 +1,14 @@
 // 导入 express 模块 
 const express = require('express')
-
-// 导入配置文件 
-const config = require('./config')
-
-// 解析 token 的中间件 
-const expressJWT = require('express-jwt')
-
+//导入定义验证规则的包
+const joi = require('joi')
 // 创建 express 的服务器实例 
 const app = express()
-
 // 导入 cors 中间件 
 const cors = require('cors')
 // 将 cors 注册为全局中间件 
 app.use(cors())
+
 //配置解析 application/x-www-form-urlencoded 格式的表单数据的中间件
 app.use(express.urlencoded({ extended: false }))
 
@@ -31,16 +26,10 @@ app.use(function (req, res, next) {
     next()
 })
 
-const joi = require('joi')
-// 错误级别中间件
-app.use((err, req, res, next) => {
-    // 数据验证失败 
-    if (err.name === 'ValidationError') return res.cc(err)
-    // 捕获身份认证失败的错误 
-    if (err.name === 'UnauthorizedError') return res.cc('身份认证失败！')
-    // 未知错误 
-    return res.cc(err)
-})
+// 导入配置文件 
+const config = require('./config')
+// 解析 token 的中间件 
+const expressJWT = require('express-jwt')
 
 // 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
 // 将用户信息挂载到res.body.user上
@@ -81,6 +70,21 @@ app.use('/my', statusRouter)
 // 用户信息更改
 const settingRouter = require('./router/setting')
 app.use('/my', settingRouter)
+
+// 错误级别中间件
+app.use((err,req,res,next)=>{
+    // 数据验证失败 
+    if (err.name === 'ValidationError') return res.cc(err)
+    // 捕获身份认证失败的错误 
+    if (err.name === 'UnauthorizedError') {
+        return res.send({
+          status: 401,
+          message: '无效的token',
+        })
+      }
+    // 未知错误 
+    return res.cc(err)
+})
 
 // write your code here...
 // 调用 app.listen 方法，指定端口号并启动web服务器

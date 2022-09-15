@@ -9,9 +9,10 @@ const settingHandler = require('../router_handler/setting_handler')
 // 导入需要的验证规则对象
 const { password_schema } = require('../schema/password')
 const { email_schema } = require('../schema/email')
+const { nickName_schema } = require('../schema/nickName')
 
 // 修改昵称
-router.post('/editNickname', settingHandler.editNickname)
+router.post('/editNickname',expressJoi(nickName_schema), settingHandler.editNickname)
 // 修改生日
 router.post('/editBirth', settingHandler.birth)
 // 修改密码

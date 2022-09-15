@@ -14,11 +14,10 @@ const phone = joi.string().pattern(/^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9
 // 密码验证规则
 // 8-16个字符，至少1个大写字母，1个小写字母和1个数字
 const password = joi.string().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/)
-// 邮箱验证规则
-const email = joi.string().email().required()
+
 
 // 注册和登录表单的验证规则对象 
 exports.user_schema = {
     // 表示需要对 req.body 中的数据进行验证
-    body: { phone, password, email},
+    body: { phone, password},
 }

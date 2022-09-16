@@ -8,4 +8,6 @@ const menuHandler = require('../router_handler/menu_handler')
 
 router.get('/menu', menuHandler.menu)
 
+router.get('/product', menuHandler.product)
+
 module.exports = router

@@ -23,7 +23,7 @@ exports.order = (req, res) => {
         if (results.length == 0) return res.cc('没有数据')
         res.send({
             status: 0,
-            message: '获取订单信息成功！',
+            message: '获取单个订单信息成功！',
             data: results
         })
     })
@@ -38,6 +38,7 @@ exports.orderDetail = (req, res) => {
         res.send({
             status: 0,
             message: '获取订单信息成功！',
+            orderId: req.query.orderId,
             data: results
         })
     })

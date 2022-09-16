@@ -18,3 +18,21 @@ exports.menu = (req, res) => {
         return res.send('没有数据')
     })
 }
+
+// 查询单个产品
+exports.product = (req, res) => {
+    const sqlQuery = ` select * from menus where id = ?`
+    db.query(sqlQuery, req.query.productId, function (err, results) {
+        if (err) {
+            return res.send({status:1,message:err.message})
+        }
+        if (results.length > 0) {
+            return res.send({
+                status: 0,
+                message: '获取产品信息成功',
+                data: results
+            })
+        }
+        return res.send('没有数据')
+    })
+}

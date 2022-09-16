@@ -69,3 +69,12 @@ exports.login = (req, res) => {
         })
     })
 }
+
+exports.user = (req, res) => { 
+    const sqlQuery = `select id,phone,nickName,email from users where id=?`
+    db.query(sqlQuery, req.query.userId, (err, results) => {
+        if (err) return res.cc(err)
+        if (results.length !== 1) return res.cc('获取用户信息失败！')
+        res.send({ status: 0, message: '获取用户基本联系信息成功！', data: results[0]})
+    })
+}

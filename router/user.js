@@ -17,5 +17,8 @@ router.post('/register',expressJoi(user_schema), userHandler.register)
 // 登录
 router.post('/login', expressJoi(user_schema), userHandler.login)
 
+// 查询用户
+router.get('/user', userHandler.user)
+
 //共享
 module.exports = router

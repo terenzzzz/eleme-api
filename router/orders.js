@@ -9,5 +9,7 @@ const ordersHandler = require('../router_handler/orders_handler')
 router.get('/orders', ordersHandler.orders)
 router.get('/order', ordersHandler.order)
 router.get('/orderDetail', ordersHandler.orderDetail)
+router.post('/submitOrder', ordersHandler.submitOrder)
+router.post('/submitOrderDetail',ordersHandler.submitOrderDetail)
 
 module.exports = router
